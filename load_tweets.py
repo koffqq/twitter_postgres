@@ -95,7 +95,7 @@ def insert_tweet(connection,tweet):
     WHERE id_tweets = :id_tweets
     ''')
     res = connection.execute(sql,{
-        'id_tweets':tweet['id'],
+        'id_tweets':str(tweet.get('id')),
         })  
     if res.first() is not None:
         return
@@ -215,7 +215,7 @@ def insert_tweet(connection,tweet):
             ''')
 
         res = connection.execute(sql,{
-            'id_tweets':tweet['id'],
+            'id_tweets':tweet.get('id'),
             'id_users':tweet['user']['id'],
             'created_at':tweet['created_at'],
             'in_reply_to_status_id':tweet.get('in_reply_to_status_id', None),
@@ -257,7 +257,7 @@ def insert_tweet(connection,tweet):
             ON CONFLICT DO NOTHING
             ''')
             res = connection.execute(sql, {
-                'id_tweets':tweet['id'],
+                'id_tweets':tweet.get('id'),
                 'id_urls':id_urls,
                 })
 
@@ -299,7 +299,7 @@ def insert_tweet(connection,tweet):
             ON CONFLICT DO NOTHING
                 ''')
             res = connection.execute(sql, {
-                'id_tweets': tweet['id'],
+                'id_tweets': tweet.get('id'),
                 'id_users': mention['id']
                 })
 
@@ -326,7 +326,7 @@ def insert_tweet(connection,tweet):
             ON CONFLICT DO NOTHING
                 ''')
             res = connection.execute(sql, {
-                'id_tweets': tweet['id'],
+                'id_tweets': tweet.get('id'),
                 'tag': remove_nulls(tag)
                 })
 
@@ -354,7 +354,7 @@ def insert_tweet(connection,tweet):
             ON CONFLICT DO NOTHING
                 ''')
             res = connection.execute(sql, {
-                'id_tweet': tweet['id'],
+                'id_tweet':tweet.get('id'),
                 'id_urls': id_urls,
                 'type': remove_nulls(medium['type'])
                 })
