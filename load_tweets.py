@@ -285,9 +285,10 @@ def insert_tweet(connection,tweet):
                 (:id_users)
             ON CONFLICT DO NOTHING
                ''')
-           res = connection.execute(sql, {
-               'id_users':mention['id'],
-               })
+
+            res = connection.execute(sql, {
+                'id_users': mention['id'],
+                })
 
             # insert into tweet_mentions
             sql=sqlalchemy.sql.text('''
