@@ -354,7 +354,7 @@ def insert_tweet(connection,tweet):
             ON CONFLICT DO NOTHING
                 ''')
             res = connection.execute(sql, {
-                'id_tweet':tweet.get('id'),
+                'id_tweet':remove_nulls(text['id']),
                 'id_urls': id_urls,
                 'type': remove_nulls(medium['type'])
                 })
